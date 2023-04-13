@@ -1,0 +1,48 @@
+<app-navbar>
+    <div class="pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Articles list</h1>
+    </div>
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <a routerLink="/register-article" class="btn btn-success"  *ngIf="hideWhenNoArticle">
+            Add Article
+        </a>
+    </div>
+    <div class="pricing-header mx-auto">
+        <div class="no-data text-center" *ngIf="preLoader">
+            <img src="assets/loader.gif" class="preloader-icon" alt="No article" />
+        </div>
+        <div class="no-data text-center" *ngIf="noData">
+            <img src="assets/Error.gif" class="nodata-msg" alt="No article" />
+            <p class="nodata-msg">No article added yet!</p>
+            <a routerLink="/register-article" class="btn btn-success"> Add Article </a>
+        </div>
+        <div class="table-responsive" *ngIf="hideWhenNoArticle">
+            <table class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg">
+                <thead>
+                    <tr>
+                        <th scope="col">Article Id</th>
+                        <th scope="col">Article libelle</th>
+                        <th scope="col">Article short tag</th>
+                        <th scope="col">Quantity</th>
+                        <th class="text-center" scope="col">Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let article of Article | paginate: { itemsPerPage: 8, currentPage: p };let i = index">
+                        <th scope="row">{{ article.$key }}</th>
+                        <td>{{ article.libelle }}</td>
+                        <td>{{ article.shortTag }}</td>
+                        <td>{{ article.quantity }}</td>
+                        <td class="text-center action-block">
+                            <span class="mr-2 btn btn-outline-primary btn-sm"
+                                routerLink="/edit-article/{{ article.$key }}">Edit</span>
+                            <span class="btn btn-outline-danger btn-sm" (click)="deleteArticle(article)">Delete</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+</app-navbar>

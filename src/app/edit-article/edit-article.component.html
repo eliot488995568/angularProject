@@ -1,0 +1,51 @@
+<app-navbar>
+    <div class="pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Edit Article Details</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group">
+                <button class="btn btn-sm btn-outline-secondary" (click)="goBack()">
+                    Go Back
+                </button>
+            </div>
+        </div>
+    </div>
+    <form [formGroup]="editForm" (ngSubmit)="updateForm()" novalidate>
+        <div class="row">
+            <div class="col-lg-5 col-md-12 col-sm-12">
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label>Libelle</label>
+                        <input type="text" formControlName="libelle" class="form-control" required />
+                        <p *ngIf="libelle?.touched && libelle?.invalid" class="error">
+                            <sup>*</sup>Please enter libelle
+                        </p>
+                        <p *ngIf="libelle?.errors?.['minlength']" class="error">
+                            <sup>*</sup>Libelle shouldn't be less than 2 words
+                        </p>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label>Short tag</label>
+                        <input type="text" formControlName="shortTag" class="form-control" required />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label>Quantity</label>
+                        <input type="nnumber" formControlName="quantity" class="form-control" required />
+                        <p *ngIf="quantity?.touched && quantity?.invalid" class="error">
+                            <sup>*</sup>Please provide quantity
+                        </p>
+                        <p *ngIf="quantity?.errors?.['pattern']" class="error">
+                            <sup>*</sup>Use numbers only number
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group text-right">
+                    <button type="submit" class="btn btn-success btn-block" [disabled]="!editForm.valid">
+                        Update Article
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</app-navbar>
