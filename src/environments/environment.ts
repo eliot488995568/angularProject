@@ -6,7 +6,8 @@ export const environment = {
     projectId: "angular-da08e",
     storageBucket: "angular-da08e.appspot.com",
     messagingSenderId: "744333831334",
-    appId: "1:744333831334:web:f1d2e16187ed4170849867"
+    appId: "1:744333831334:web:f1d2e16187ed4170849867",
+    databaseURL: "https://angular-da08e-default-rtdb.europe-west1.firebasedatabase.app",
   }
 };
 
