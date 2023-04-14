@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CrudService } from '../../shared/crud.service';
 import { Article } from '../../shared/article'; 
 import { ToastrService } from 'ngx-toastr';
+import { faSortAsc, faSortDesc } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-article-list',
@@ -13,6 +14,12 @@ export class ArticleListComponent implements OnInit {
   hideWhenNoArticle: boolean = false;
   noData: boolean = false;
   preLoader: boolean = true;
+  sortDirection: string = 'asc';
+  sortColumn: string = 'libelle';
+  faSortAsc = faSortAsc;
+  faSortDesc = faSortDesc;
+  itemsPerPage: number = 8;
+  paginationOptions = [5, 10, 25, 50];
   
   constructor(
     public crudApi: CrudService,
@@ -50,6 +57,24 @@ export class ArticleListComponent implements OnInit {
     if (window.confirm('Are sure you want to delete this article ?')) { 
       this.crudApi.DeleteArticle(article.$key)
       this.toastr.success(article.libelle + ' successfully deleted!');
+    }
+  }
+  sortBy(column: string) {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.sortColumn = column;
+    this.Article.sort((a, b) => {
+      const direction = this.sortDirection === 'asc' ? 1 : -1;
+      if (a[column] < b[column]) return -1 * direction;
+      if (a[column] > b[column]) return 1 * direction;
+      return 0;
+    });
+  }
+  onItemsPerPageChange(event: any) {
+    const target = event.target as HTMLSelectElement;
+    if (target) {
+      const itemsPerPage = parseInt(target.value, 10);
+      this.itemsPerPage = itemsPerPage;
+      this.p = 1;
     }
   }
 }

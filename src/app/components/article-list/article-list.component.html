@@ -4,7 +4,7 @@
     </div>
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <a routerLink="/register-article" class="btn btn-success"  *ngIf="hideWhenNoArticle">
+        <a routerLink="/register-article" class="btn btn-success" *ngIf="hideWhenNoArticle">
             Add Article
         </a>
     </div>
@@ -18,31 +18,63 @@
             <a routerLink="/register-article" class="btn btn-success"> Add Article </a>
         </div>
         <div class="table-responsive" *ngIf="hideWhenNoArticle">
-            <table datatable class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg">
+            <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Article Id</th>
-                        <th scope="col">Article libelle</th>
-                        <th scope="col">Article short tag</th>
-                        <th scope="col">Quantity</th>
-                        <th class="text-center" scope="col">Edit</th>
+                        <th scope="col" (click)="sortBy('$key')" class="cursor-pointer">
+                            Article Id
+                            <fa-icon *ngIf="sortColumn === '$key' && sortDirection === 'asc'"
+                                [icon]="faSortAsc"></fa-icon>
+                            <fa-icon *ngIf="sortColumn === '$key' && sortDirection === 'desc'"
+                                [icon]="faSortDesc"></fa-icon>
+                        </th>
+                        <th scope="col" (click)="sortBy('libelle')" class="cursor-pointer">
+                            Article libelle
+                            <fa-icon *ngIf="sortColumn === 'libelle' && sortDirection === 'asc'"
+                                [icon]="faSortAsc"></fa-icon>
+                            <fa-icon *ngIf="sortColumn === 'libelle' && sortDirection === 'desc'"
+                                [icon]="faSortDesc"></fa-icon>
+                        </th>
+                        <th scope="col" (click)="sortBy('shortTag')" class="cursor-pointer">
+                            Article short shortTag
+                            <fa-icon *ngIf="sortColumn === 'shortTag' && sortDirection === 'asc'"
+                                [icon]="faSortAsc"></fa-icon>
+                            <fa-icon *ngIf="sortColumn === 'shortTag' && sortDirection === 'desc'"
+                                [icon]="faSortDesc"></fa-icon>
+                        </th>
+                        <th scope="col" (click)="sortBy('quantity')" class="cursor-pointer">
+                            Quantity
+                            <fa-icon *ngIf="sortColumn === 'quantity' && sortDirection === 'asc'"
+                                [icon]="faSortAsc"></fa-icon>
+                            <fa-icon *ngIf="sortColumn === 'quantity' && sortDirection === 'desc'"
+                                [icon]="faSortDesc"></fa-icon>
+                        </th>
+                        <th class="text-center" scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let article of Article | paginate: { itemsPerPage: 8, currentPage: p };let i = index">
-                        <th scope="row">{{ article.$key }}</th>
+                    <tr *ngFor="let article of Article | paginate: { itemsPerPage: itemsPerPage, currentPage: p };let i = index">
+                        <th>{{ article.$key }}</th>
                         <td>{{ article.libelle }}</td>
                         <td>{{ article.shortTag }}</td>
                         <td>{{ article.quantity }}</td>
-                        <td class="text-center action-block">
-                            <span class="mr-2 btn btn-outline-primary btn-sm"
-                                routerLink="/edit-article/{{ article.$key }}">Edit</span>
-                            <span class="btn btn-outline-danger btn-sm" (click)="deleteArticle(article)">Delete</span>
+                        <td class="text-center">
+                            <button class="btn btn-primary btn-sm me-2"
+                                routerLink="/edit-article/{{ article.$key }}">Edit</button>
+                            <button class="btn btn-danger btn-sm" (click)="deleteArticle(article)">Delete</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="mb-3">
+                <select class="form-select" id="itemsPerPageSelect" [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange($event)">
+                    <option *ngFor="let option of paginationOptions" [value]="option">{{option}}</option>
+                </select>
+                <label>items per page</label>
+            </div>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
     </div>
 </app-navbar>

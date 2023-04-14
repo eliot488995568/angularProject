@@ -27,6 +27,7 @@ import { ArticleListComponent } from './components/article-list/article-list.com
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DataTablesModule } from "angular-datatables";
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { DataTablesModule } from "angular-datatables";
     ToastrModule.forRoot(),
     ReactiveFormsModule,
     NgxPaginationModule,
-    DataTablesModule
+    DataTablesModule,
+    FormsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
