@@ -240,7 +240,7 @@ input:-moz-placeholder {
   bottom: 0;
   left: 0;
   z-index: 100;
-  padding: 48px 0 0;
+  padding: 4.1% 0 0;
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -425,10 +425,6 @@ body .navbar-brand {
 .pt-3,
 .py-3 {
   padding-top: 2.4rem !important;
-}
-
-.sidebar-sticky {
-  padding-top: 1.2rem !important;
 }
 
 /* Form */

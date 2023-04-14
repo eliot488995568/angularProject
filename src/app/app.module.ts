@@ -21,11 +21,12 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { AuthService } from "./shared/services/auth.service";
-import { AddArticleComponent } from './add-article/add-article.component';
-import { EditArticleComponent } from './edit-article/edit-article.component';
-import { ArticleListComponent } from './article-list/article-list.component';
+import { AddArticleComponent } from './components/add-article/add-article.component';
+import { EditArticleComponent } from './components/edit-article/edit-article.component';
+import { ArticleListComponent } from './components/article-list/article-list.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { DataTablesModule } from "angular-datatables";
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    DataTablesModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

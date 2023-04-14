@@ -1,10 +1,10 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { CrudService } from '../shared/crud.service';
+import { CrudService } from '../../shared/crud.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
-import { Article } from '../shared/article';
+import { Article } from '../../shared/article';
 
 @Component({
   selector: 'app-edit-article',

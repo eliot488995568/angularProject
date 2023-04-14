@@ -5,9 +5,9 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
-import { AddArticleComponent } from './add-article/add-article.component';
-import { ArticleListComponent } from './article-list/article-list.component';
-import { EditArticleComponent } from './edit-article/edit-article.component';
+import { AddArticleComponent } from './components/add-article/add-article.component';
+import { ArticleListComponent } from './components/article-list/article-list.component';
+import { EditArticleComponent } from './components/edit-article/edit-article.component';
 // route guard
 import { AuthGuard } from './shared/guard/auth.guard';
 const routes: Routes = [
